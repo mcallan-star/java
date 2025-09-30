@@ -1,5 +1,5 @@
 import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.IOException;    
 import java.io.InputStreamReader;
 import java.util.Random;
 
@@ -30,7 +30,7 @@ public class Magic8Ball implements Answerable {
     
     private Random random;
     private int currentAnswer;
-    
+
     /*
      * Constructor for Magic8Ball
      * Magic8Ball objects can be created in outside classes because constructor is public
