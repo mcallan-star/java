@@ -7,98 +7,26 @@ import java.util.*;
  * Each shuffle produces exactly one configuration of all 52 cards, and different
  * seeds produce different configurations while the same seed produces identical results.
  * 
- * PSEUDOCODE BREAKDOWN:
- * 
- * STEP 1: Initialize the Deck
- * 1. Create an empty list called "deck"
- * 2. Create arrays for suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
- * 3. Create arrays for ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
- * 4. FOR each suit in suits:
- *    FOR each rank in ranks:
- *      Add "rank of suit" to deck
- * 5. Result: 52 cards (4*13) exist in deck - Note: 52! is all possible arrangements of the cards
- * 
- * STEP 2: Create Random Number Generator
- * 1. Create a random number generator object
- * 2. Initialize it (it will use current system time as default seed)
- * 
- * STEP 3: Shuffle Method with New Seed Each Time
- * PSEUDOCODE for shuffleDeck():
- * 1. Generate new seed = current_time_milliseconds + current_time_nanoseconds
- * 2. Set the random generator's seed to this new value
- * 3. Print "Shuffling with seed: [seed_value]"
- * 4. FOR i from (deck_size - 1) down to 1:
- *    a. Generate random number j between 0 and i (inclusive)
- *    b. Swap deck[i] with deck[j]
- * 5. Deck is now shuffled with unique configuration
- * 
- * STEP 4: Shuffle Method with Specific Seed
- * PSEUDOCODE for shuffleDeckWithSeed(specific_seed):
- * 1. Reset deck to original order (call step 1 again)
- * 2. Set random generator's seed to specific_seed
- * 3. Print "Shuffling with seed: [specific_seed]"
- * 4. FOR i from (deck_size - 1) down to 1:
- *    a. Generate random number j between 0 and i (inclusive)
- *    b. Swap deck[i] with deck[j]
- * 5. Result: Same seed always produces same shuffle
- * 
- * STEP 5: Display Methods
- * PSEUDOCODE for showTopCards(number_of_cards):
- * 1. Print "Top [number_of_cards] cards:"
- * 2. FOR i from 0 to min(number_of_cards, deck_size):
- *    Print position_number + ". " + deck[i]
- * 
- * PSEUDOCODE for showFullDeck():
- * 1. Print "Complete deck configuration:"
- * 2. FOR i from 0 to deck_size:
- *    Print position + ". " + card_name
- *    IF position is multiple of 4: print new line
- * 
- * STEP 6: Main Demonstration Logic
- * PSEUDOCODE for main():
- * 1. Create new CardDeckShuffle object
- * 2. Show original deck order (first 10 cards)
- * 
- * 3. DEMONSTRATION 1 - Multiple Random Shuffles:
- *    FOR shuffle_number from 1 to 3:
- *      Call shuffleDeck() - uses new seed each time
- *      Show top 8 cards
- *      Wait brief moment (so timestamps differ)
- * 
- * 4. DEMONSTRATION 2 - Reproducible Shuffles:
- *    Set fixed_seed = 12345
- *    Call shuffleDeckWithSeed(fixed_seed)
- *    Show top 8 cards
- *    Call shuffleDeckWithSeed(fixed_seed) again
- *    Show top 8 cards
- *    Print message: "Same seed = identical results"
- * 
- * 5. DEMONSTRATION 3 - Different Seeds:
- *    Create array of seeds = [1000, 2000, 3000]
- *    FOR each seed in array:
- *      Call shuffleDeckWithSeed(seed)
- *      Show first 5 cards with seed label
- * 
- * KEY CONCEPTS IMPLEMENTED:
  * - Random Seed Generation: Use system time (milliseconds + nanoseconds) for unique seeds
  * - Same seed = same "random" sequence = same shuffle
  * - Fisher-Yates Shuffle Algorithm: Start from last card, work backwards
  * - For each position, swap with random earlier position
  * - Ensures each of 52! possible arrangements has equal probability
- * 
- * DEMONSTRATION POINTS:
- * - Show that different seeds create different shuffles
- * - Show that same seed creates identical shuffles
- * - Show that each shuffle without specified seed is unique
- *   
  * Fisher-Yates shuffle algorithm GOAL: Each of the 52! possible arrangements should have exactly equal probability (1/52!).
  * The Backwards Logic:
  *
  * Last position (index 51): Can be filled by any of the 52 cards → 52 choices
  * Second-to-last (index 50): Can be filled by any of the remaining 51 cards → 51 choices
  * Third-to-last (index 49): Can be filled by any of the remaining 50 cards → 50 choices
- * Continue until position 1: Gets one of the remaining 2 cards → 2 choices
+ * Continue UNTIL position 1: Gets one of the remaining 2 cards → 2 choices
  * Position 0: Gets the last remaining card → 1 choice (automatic)
+ * 
+ * DEMONSTRATION:
+ * - Show that different seeds create different shuffles
+ * - Show that same seed creates identical shuffles
+ * - Show that each shuffle without specified seed is unique
+ *   
+ * 
  */
 public class CardDeckShuffle {
     
